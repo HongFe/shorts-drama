@@ -16,7 +16,7 @@
 | EP.05 | 월요일, 본부장이 출근했다 |
 
 ## 의견 남기기
-[Discussions](https://github.com/HongFe/shorts-drama/discussions)에 남겨 주세요.
+[시청 후기](https://github.com/HongFe/shorts-drama/discussions/2) · [시즌 2 투표](https://github.com/HongFe/shorts-drama/discussions/1)에 남겨 주세요.
 - 몇 화 몇 초쯤에서 넘기고 싶었는지
 - 다음 화를 찾아볼 것 같은지
 - 시즌 2는 A(또 다른 피해자) · B(하린의 반격) · C(신혼집의 진실) 중 어느 쪽이 보고 싶은지
