@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>오발송 — 시즌 1 시사회</title>
+<meta name="description" content="1분 채팅 드라마 「오발송」 시즌 1 테스트 시청 페이지">
+<style>
+:root{
+  --font-sans:"Pretendard","Pretendard Variable","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic","맑은 고딕",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bg:#0d0c18;--tx:#f1f0f8;--sub:#a3a1bb;--acc:#ffd400;--acc2:#9333ea;--card:#1a1830;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--tx);font-family:var(--font-sans);word-break:keep-all;overflow-wrap:anywhere;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+#feed{height:100svh;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none}
+#feed::-webkit-scrollbar{display:none}
+section{height:100svh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;position:relative}
+.frame{position:relative;height:100svh;width:min(100vw,calc(100svh*9/16));background:#000;overflow:hidden}
+video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.meta{position:absolute;left:0;right:0;bottom:0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(transparent,rgba(0,0,0,.85) 40%);pointer-events:none}
+.meta *{pointer-events:auto}
+.ep{font-size:13px;font-weight:800;color:var(--acc);letter-spacing:.04em}
+.ttl{font-size:18px;font-weight:800;margin:2px 0 10px;line-height:1.35}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:700;color:var(--tx);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:8px 14px;text-decoration:none;cursor:pointer}
+.btn.pri{background:var(--acc);color:#1d1b26;border-color:var(--acc)}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);border:0;cursor:pointer;color:#fff}
+.play span{width:84px;height:84px;border-radius:50%;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;font-size:34px;padding-left:6px}
+.play.hide{display:none}
+.bar{position:absolute;top:0;left:0;height:3px;background:var(--acc);width:0}
+.mute{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:3}
+.card{width:min(100vw,calc(100svh*9/16));height:100svh;padding:28px 22px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:center;gap:16px;background:radial-gradient(120% 70% at 50% 30%,#2a2346 0%,var(--bg) 75%)}
+.card h1{font-size:40px;font-weight:900;letter-spacing:-.03em}
+.card h2{font-size:22px;font-weight:800}
+.card p,.card li{font-size:15.5px;line-height:1.65;color:var(--sub)}
+.card b{color:var(--tx)}
+.card ol{padding-left:20px}
+.tag{display:inline-block;font-size:12px;font-weight:700;color:var(--sub);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:2px 10px;margin-right:4px}
+.opt{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px}
+.opt b{color:var(--acc)}
+.dots{position:fixed;right:8px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:5}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);display:block}
+.dots i.on{background:var(--acc)}
+.small{font-size:12.5px!important;color:var(--sub)}
+</style>
+</head>
+<body>
+<div id="feed"></div>
+<div class="dots" id="dots"></div>
+<script>
+'use strict';
+// 링크는 저장소 Discussions 로 간다 (GitHub 계정이 있으면 댓글·👍로 의견을 남길 수 있다)
+const REPO = 'https://github.com/HongFe/shorts-drama';
+const DRAMA = {
+  title: '오발송', season: '시즌 1',
+  logline: '결혼 두 달 전, 남친이 보낸 문자 한 통이 나에게 잘못 왔다. 1분짜리 채팅 드라마 5화.',
+  feedback: REPO + '/discussions',
+  vote: REPO + '/discussions',
+  episodes: [
+    {no:1, title:'남친이 보낸 문자, 나한테 온 게 아니었다'},
+    {no:2, title:'친구가 보낸 사진 속 남자'},
+    {no:3, title:'3천만 원만 보내 달래요'},
+    {no:4, title:'같은 시각, 그들의 대화방'},
+    {no:5, title:'월요일, 본부장이 출근했다'},
+  ],
+  next: [
+    {k:'A', t:'또 다른 피해자', d:'모르는 번호는 민재에게 돈을 뜯긴 전 여자친구. 둘이 손잡고 민재의 거짓말을 파헤친다'},
+    {k:'B', t:'하린의 반격', d:'하린이 회사에서 서윤의 약점을 퍼뜨리며 반격한다. 서윤이 공정하게 받아치는 오피스 사이다'},
+    {k:'C', t:'신혼집의 진실', d:'민재가 계약하려던 신혼집이 사기 매물이었다. 모르는 번호는 부동산 피해자 모임'},
+  ],
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad = n => String(n).padStart(2,'0');
+const feed = document.getElementById('feed');
+let html = `<section><div class="card">
+  <div><span class="tag">테스트 시사회</span><span class="tag">가상 인물</span></div>
+  <h1>${esc(DRAMA.title)}</h1>
+  <p><b>${esc(DRAMA.season)}</b> · ${esc(DRAMA.logline)}</p>
+  <div class="opt"><p><b>부탁드려요</b> 보고 나서 세 가지만 알려 주세요.</p>
+  <ol><li>몇 화 몇 초쯤에서 <b>넘기고 싶었나요?</b></li><li>다음 화를 <b>찾아볼 것 같나요?</b></li><li>시즌 2는 <b>A·B·C 중 어느 쪽</b>이 보고 싶나요? (마지막 화면)</li></ol></div>
+  <div class="row"><button class="btn pri" onclick="go(1)">▶ 1화부터 보기</button></div>
+  <p class="small">위아래로 넘기면 다음 화로 갑니다. 소리를 켜고 보면 더 좋아요.</p>
+</div></section>`;
+for (const e of DRAMA.episodes) {
+  html += `<section data-ep="${e.no}"><div class="frame">
+    <video id="v${e.no}" src="obalsong/videos/ep${pad(e.no)}.mp4" poster="obalsong/posters/ep${pad(e.no)}.jpg" playsinline preload="metadata"></video>
+    <div class="bar" id="b${e.no}"></div>
+    <button class="play" id="p${e.no}" aria-label="재생"><span>▶</span></button>
+    <div class="meta"><div class="ep">EP.${pad(e.no)}</div><div class="ttl">${esc(e.title)}</div>
+      <div class="row"><a class="btn" href="${DRAMA.feedback}" target="_blank" rel="noopener">💬 후기 남기기</a>
+      ${e.no < DRAMA.episodes.length ? `<button class="btn" onclick="go(${e.no+1})">다음 화 ↓</button>` : `<button class="btn pri" onclick="go(${e.no+1})">시즌 2 투표 ↓</button>`}</div></div>
+  </div></section>`;
+}
+html += `<section><div class="card">
+  <span class="tag">시즌 2 투표</span>
+  <h2>모르는 번호의 정체는?</h2>
+  <p>댓글이 가장 많은 쪽으로 시즌 2를 만듭니다.</p>
+  ${DRAMA.next.map(o => `<div class="opt"><p><b>${o.k}. ${esc(o.t)}</b></p><p>${esc(o.d)}</p></div>`).join('')}
+  <div class="row"><a class="btn pri" href="${DRAMA.vote}" target="_blank" rel="noopener">🗳 투표·댓글 남기러 가기</a><button class="btn" onclick="go(0)">처음으로</button></div>
+  <p class="small">투표와 후기는 GitHub Discussions에 남깁니다(GitHub 계정 필요). 계정이 없으면 보내 준 분께 답장으로 알려 주세요.<br>등장인물·회사·대화는 모두 가상입니다. 대본과 영상 제작에 AI 도구를 사용했습니다.</p>
+</div></section>`;
+feed.innerHTML = html;
+
+const sections = [...feed.querySelectorAll('section')];
+document.getElementById('dots').innerHTML = sections.map(() => '<i></i>').join('');
+const dots = [...document.querySelectorAll('#dots i')];
+function go(i){ sections[i].scrollIntoView({behavior:'smooth'}); }
+window.go = go;
+let unlocked = false;   // 첫 터치 이후에는 다음 화를 자동 재생한다
+for (const e of DRAMA.episodes) {
+  const v = document.getElementById('v'+e.no), p = document.getElementById('p'+e.no), b = document.getElementById('b'+e.no);
+  const toggle = () => { unlocked = true; if (v.paused) v.play().catch(()=>{}); else v.pause(); };
+  p.onclick = toggle; v.onclick = toggle;
+  v.onplay = () => p.classList.add('hide');
+  v.onpause = () => p.classList.remove('hide');
+  v.ontimeupdate = () => { b.style.width = (v.currentTime / (v.duration || 1) * 100) + '%'; };
+  v.onended = () => go(e.no + 1);
+}
+const io = new IntersectionObserver(es => es.forEach(en => {
+  const i = sections.indexOf(en.target);
+  if (en.isIntersecting && en.intersectionRatio > 0.6) {
+    dots.forEach((d, k) => d.classList.toggle('on', k === i));
+    const v = en.target.querySelector('video');
+    if (v && unlocked) { v.currentTime = 0; v.play().catch(()=>{}); }
+  } else {
+    const v = en.target.querySelector('video'); if (v && !v.paused) v.pause();
+  }
+}), {root: feed, threshold: [0, 0.6]});
+sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>
